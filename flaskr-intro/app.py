@@ -1,8 +1,9 @@
 # imports
-from flask import Flask, request, session, g, redirect, url_for, \
+from flask import Flask, request, session, redirect, url_for, \
      abort, render_template, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
+import models
 
 # grabs the folder where the script runs
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -25,8 +26,6 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 app = Flask(__name__)
 app.config.from_object(__name__)
 db = SQLAlchemy(app)
-
-import models
 
 
 @app.route('/')
@@ -51,17 +50,24 @@ def add_entry():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """User login/authentication/session management."""
-    error = None
-    if request.method == 'POST':
-        if request.form['username'] != app.config['USERNAME']:
-            error = 'Invalid username'
-        elif request.form['password'] != app.config['PASSWORD']:
-            error = 'Invalid password'
-        else:
-            session['logged_in'] = True
-            flash('You were logged in')
-            return redirect(url_for('index'))
-    return render_template('login.html', error=error)
+    TEMPLATE = "login.html"
+    if request.method != 'POST':
+        return render_template(TEMPLATE, error=None)
+    error = _validate_credentials(request.form)
+    if error is not None:
+        return render_template(TEMPLATE, error=error)
+
+    session['logged_in'] = True
+    flash('You were logged in')
+    return redirect(url_for('index'))
+
+
+def _validate_credentials(form_dict):
+    error_msg = "Invalid username or password"
+    username, password = form_dict['username'], form_dict['password']
+    if (username != app.config['USERNAME'] or
+            password != app.config['PASSWORD']):
+        return error_msg
 
 
 @app.route('/logout')
@@ -94,6 +100,7 @@ def search():
     if query:
         return render_template('search.html', entries=entries, query=query)
     return render_template('search.html')
+
 
 if __name__ == '__main__':
     app.run()
