@@ -27,6 +27,3 @@ app.config.from_object(__name__)
 db = SQLAlchemy(app)
 
 import flaskr_intro.views
-
-# if __name__ == '__main__':
-#     app.run()
