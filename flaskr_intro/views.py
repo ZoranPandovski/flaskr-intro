@@ -1,37 +1,14 @@
-# imports
-from flask import Flask, request, session, redirect, url_for, \
-     abort, render_template, flash, jsonify
-from flask_sqlalchemy import SQLAlchemy
-import os
-import models
+from flask import request, session, redirect, url_for, \
+    abort, render_template, flash, jsonify
 
-# grabs the folder where the script runs
-basedir = os.path.abspath(os.path.dirname(__file__))
-
-# configuration
-DATABASE = 'flaskr.db'
-DEBUG = True
-SECRET_KEY = 'my_precious'
-USERNAME = 'admin'
-PASSWORD = 'admin'
-
-# defines the full path for the database
-DATABASE_PATH = os.path.join(basedir, DATABASE)
-
-# database config
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_PATH
-SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-# create app
-app = Flask(__name__)
-app.config.from_object(__name__)
-db = SQLAlchemy(app)
+from flaskr_intro import app, db
+from .models import Flaskr
 
 
 @app.route('/')
 def index():
     """Searches the database for entries, then displays them."""
-    entries = db.session.query(models.Flaskr)
+    entries = db.session.query(Flaskr)
     return render_template('index.html', entries=entries)
 
 
@@ -40,7 +17,7 @@ def add_entry():
     """Adds new post to the database."""
     if not session.get('logged_in'):
         abort(401)
-    new_entry = models.Flaskr(request.form['title'], request.form['text'])
+    new_entry = Flaskr(request.form['title'], request.form['text'])
     db.session.add(new_entry)
     db.session.commit()
     flash('New entry was successfully posted')
@@ -66,7 +43,7 @@ def _validate_credentials(form_dict):
     error_msg = "Invalid username or password"
     username, password = form_dict['username'], form_dict['password']
     if (username != app.config['USERNAME'] or
-            password != app.config['PASSWORD']):
+                password != app.config['PASSWORD']):
         return error_msg
 
 
@@ -84,7 +61,7 @@ def delete_entry(post_id):
     result = {'status': 0, 'message': 'Error'}
     try:
         new_id = post_id
-        db.session.query(models.Flaskr).filter_by(post_id=new_id).delete()
+        db.session.query(Flaskr).filter_by(post_id=new_id).delete()
         db.session.commit()
         result = {'status': 1, 'message': "Post Deleted"}
         flash('The entry was deleted.')
@@ -96,11 +73,7 @@ def delete_entry(post_id):
 @app.route('/search/', methods=['GET'])
 def search():
     query = request.args.get("query")
-    entries = db.session.query(models.Flaskr)
+    entries = db.session.query(Flaskr)
     if query:
         return render_template('search.html', entries=entries, query=query)
     return render_template('search.html')
-
-
-if __name__ == '__main__':
-    app.run()

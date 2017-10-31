@@ -1,4 +1,4 @@
-from app import db
+from flaskr_intro import db
 
 
 class Flaskr(db.Model):
