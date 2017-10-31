@@ -84,6 +84,23 @@ class FlaskrTestCase(unittest.TestCase):
         data = json.loads(rv.data)
         self.assertEqual(data['status'], 1)
 
+    def test_post_fail_without_login(self):
+        """Ensure anonymous users can't make blog post"""
+        rv = self.app.post('/add', data=dict(
+            title='<Hello>',
+            text='<strong>HTML</strong> allowed here'
+        ), follow_redirects=True)
+        self.assertIn(b'Unauthorized', rv.data)
+
+    def test_post_fail_with_invalid_login(self):
+        """Ensure anonymous users can't make blog post"""
+        self.login(app.config['USERNAME'] + 'x', app.config['PASSWORD'])
+        rv = self.app.post('/add', data=dict(
+            title='<Hello>',
+            text='<strong>HTML</strong> allowed here'
+        ), follow_redirects=True)
+        self.assertIn(b'Unauthorized', rv.data)
+
 
 if __name__ == '__main__':
     unittest.main()
