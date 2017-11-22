@@ -12,19 +12,6 @@ APP_DB = "flaskr.db"
 DB_PATH = os.path.join(basedir, APP_NAME, APP_DB)
 
 
-class BasicTestCase(unittest.TestCase):
-    def test_index(self):
-        """initial test. ensure flask was set up correctly"""
-        tester = app.test_client(self)
-        response = tester.get('/', content_type='html/text')
-        self.assertEqual(response.status_code, 200)
-
-    def test_database(self):
-        """initial test. ensure that the database exists"""
-        tester = os.path.exists(DB_PATH)
-        #self.assertTrue(tester)
-
-
 class FlaskrTestCase(unittest.TestCase):
     def setUp(self):
         """Set up a blank temp database before each test"""
@@ -50,6 +37,17 @@ class FlaskrTestCase(unittest.TestCase):
         return self.app.get('/logout', follow_redirects=True)
 
     # assert functions
+
+    def test_index(self):
+        """initial test. ensure flask was set up correctly"""
+        tester = app.test_client(self)
+        response = tester.get('/login', content_type='html/text')
+        self.assertEqual(response.status_code, 200)
+
+    def test_database(self):
+        """initial test. ensure that the database exists"""
+        tester = os.path.exists(DB_PATH)
+        self.assertTrue(tester)
 
     def test_empty_db(self):
         """Ensure database is blank"""
