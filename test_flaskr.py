@@ -46,7 +46,7 @@ class FlaskrTestCase(unittest.TestCase):
 
     def test_database(self):
         """initial test. ensure that the database exists"""
-        tester = os.path.exists(DB_PATH)
+        tester = os.path.exists("test.db")
         self.assertTrue(tester)
 
     def test_empty_db(self):
