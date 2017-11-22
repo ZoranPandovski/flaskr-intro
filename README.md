@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/ZoranPandovski/flaskr-intro.svg?branch=master)](https://travis-ci.org/ZoranPandovski/flaskr-intro)
+[![Coverage Status](https://coveralls.io/repos/github/ZoranPandovski/flaskr-intro/badge.svg?branch=master)](https://coveralls.io/github/ZoranPandovski/flaskr-intro?branch=master)
+
 # Flaskr
 
 Flaskr is a mini blog application that you are building following the official [Flask tutorial](http://flask.pocoo.org/docs/0.12/tutorial/introduction/). The app essentially, will do the following things:
