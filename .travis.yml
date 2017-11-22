@@ -7,7 +7,7 @@ install:
   - pip install coveralls
 # command to run tests
 script:
-  - coverage run -m unittest test_flaskr.py
+  - coverage run -m unittest test_flaskr
   - coverage report -m
 after_success:
   - coveralls
