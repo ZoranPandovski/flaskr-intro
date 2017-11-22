@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/ZoranPandovski/flaskr-intro.svg?branch=master)](https://travis-ci.org/ZoranPandovski/flaskr-intro)
 [![Coverage Status](https://coveralls.io/repos/github/ZoranPandovski/flaskr-intro/badge.svg?branch=master)](https://coveralls.io/github/ZoranPandovski/flaskr-intro?branch=master)
+[![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT)
+
 
 # Flaskr
 
