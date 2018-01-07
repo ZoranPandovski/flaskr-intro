@@ -1,7 +1,13 @@
+<h1 align="center">
+	<img width="400" src="http://flask.pocoo.org/static/logo/flask.png" alt="Flask">
+	<br>
+	<br>
+</h1>
+
 [![Build Status](https://travis-ci.org/ZoranPandovski/flaskr-intro.svg?branch=master)](https://travis-ci.org/ZoranPandovski/flaskr-intro)
 [![Coverage Status](https://coveralls.io/repos/github/ZoranPandovski/flaskr-intro/badge.svg?branch=master)](https://coveralls.io/github/ZoranPandovski/flaskr-intro?branch=master)
 [![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT)
-
+[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ZoranPandovski/flaskr-intro/issues)
 
 # Flaskr
 
