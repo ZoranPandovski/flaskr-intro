@@ -4,6 +4,7 @@
 	<br>
 </h1>
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/233b50af58204263b7f7424f660d02ff)](https://app.codacy.com/app/ZoranPandovski/flaskr-intro?utm_source=github.com&utm_medium=referral&utm_content=ZoranPandovski/flaskr-intro&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/ZoranPandovski/flaskr-intro.svg?branch=master)](https://travis-ci.org/ZoranPandovski/flaskr-intro)
 [![Coverage Status](https://coveralls.io/repos/github/ZoranPandovski/flaskr-intro/badge.svg?branch=master)](https://coveralls.io/github/ZoranPandovski/flaskr-intro?branch=master)
 [![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT)
