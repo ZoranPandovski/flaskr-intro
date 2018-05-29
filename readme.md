@@ -1,5 +1,5 @@
 <h1 align="center">
-	<img width="400" src="http://flask.pocoo.org/static/logo/flask.png" alt="Flask">
+	<img width="400" src="media/flask.png" alt="Flask">
 	<br>
 	<br>
 </h1>
