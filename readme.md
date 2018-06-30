@@ -8,6 +8,7 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/ZoranPandovski/flaskr-intro?branch=master)](https://bettercodehub.com/)
 [![Build Status](https://travis-ci.org/ZoranPandovski/flaskr-intro.svg?branch=master)](https://travis-ci.org/ZoranPandovski/flaskr-intro)
 [![Coverage Status](https://coveralls.io/repos/github/ZoranPandovski/flaskr-intro/badge.svg?branch=master)](https://coveralls.io/github/ZoranPandovski/flaskr-intro?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/ZoranPandovski/flaskr-intro/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/ZoranPandovski/flaskr-intro?targetFile=requirements.txt)
 [![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ZoranPandovski/flaskr-intro/issues)
 
