@@ -24,10 +24,13 @@ There is another great tutorial for flask and tdd at https://realpython.com/
 
 To run the application, open up a command prompt (on Windows) and type in the following: 
 
-1. `set FLASK_APP=server.py`
-2. `set FLASK_DEBUG=1`
-3. `flask initdb`
-4. `flask run`
+1. `pipenv sync`
+2. `set FLASK_APP=server.py`
+3. `set FLASK_DEBUG=1`
+4. `flask initdb`
+5. `flask run`
 
-To test the application, from the root folder run: `python test_flaskr.py`
+To test the application:
 
+1. `pipenv sync --dev`
+2. `python test_flaskr.py`
