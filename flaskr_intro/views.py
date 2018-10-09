@@ -42,8 +42,8 @@ def login():
 def _validate_credentials(form_dict):
     error_msg = "Invalid username or password"
     username, password = form_dict['username'], form_dict['password']
-    if (username != app.config['USERNAME'] or
-                password != app.config['PASSWORD']):
+    if (username != app.config['USERNAME']
+            or password != app.config['PASSWORD']):
         return error_msg
 
 

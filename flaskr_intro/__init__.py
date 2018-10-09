@@ -26,4 +26,4 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 db = SQLAlchemy(app)
 
-import flaskr_intro.views
+import flaskr_intro.views # noqa
