@@ -99,6 +99,11 @@ class FlaskrTestCase(unittest.TestCase):
         ), follow_redirects=True)
         self.assertIn(b'Unauthorized', rv.data)
 
+    def test_get_search_query(self):
+        """Ensure search path is available"""
+        rv = self.app.get('/search/')
+        self.assertEqual(rv.status_code, 200)
+
 
 if __name__ == '__main__':
     unittest.main()
