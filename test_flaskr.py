@@ -1,15 +1,28 @@
 import os
 import unittest
 
+from unittest.mock import patch, Mock
+
 from flask import json
 
 from flaskr_intro import app, db
+from flaskr_intro.models import Flaskr
 
 TEST_DB = 'test.db'
 basedir = os.path.abspath(os.path.dirname(__file__))
 APP_NAME = "flaskr_intro"
 APP_DB = "flaskr.db"
 DB_PATH = os.path.join(basedir, APP_NAME, APP_DB)
+
+
+class FlaskrModelTestCase(unittest.TestCase):
+
+    def test_can_create_a_model(self):
+        model = Flaskr('a title', 'some text')
+
+        self.assertEqual(model.title, 'a title')
+        self.assertEqual(model.text, 'some text')
+        self.assertEqual(str(model), '<title: a title>')
 
 
 class FlaskrTestCase(unittest.TestCase):
@@ -81,6 +94,17 @@ class FlaskrTestCase(unittest.TestCase):
         rv = self.app.get('/delete/1')
         data = json.loads(rv.data)
         self.assertEqual(data['status'], 1)
+        self.assertEqual(data['message'], 'Post Deleted')
+
+    @patch('flaskr_intro.views.db')
+    def test_delete_message_can_fail(self, db_mock):
+        """Ensure the messages are being deleted"""
+        db_mock.session.query = Mock(side_effect=Exception('Some message'))
+
+        rv = self.app.get('/delete/1')
+        data = json.loads(rv.data)
+        self.assertEqual(data['status'], 0)
+        self.assertEqual(data['message'], "Exception('Some message',)")
 
     def test_post_fail_without_login(self):
         """Ensure anonymous users can't make blog post"""
@@ -103,7 +127,36 @@ class FlaskrTestCase(unittest.TestCase):
         """Ensure search path is available"""
         rv = self.app.get('/search/')
         self.assertEqual(rv.status_code, 200)
+        
+    @patch('flaskr_intro.views.db')
+    def test_search_message(self, mock_db):
+        """Ensure the messages are being deleted"""
+        entries = [
+            Flaskr('entry1', 'text'),
+            Flaskr('entry2', 'text')
+        ]
+        mock_db.session.query = Mock(return_value=entries)
 
+        rv = self.app.get('/search/')
+
+        mock_db.session.query.assert_called_once()
+
+        self.assertIn(b'<!DOCTYPE html>', rv.data)
+
+    @patch('flaskr_intro.views.db')
+    def test_search_message_with_query(self, mock_db):
+        """Ensure the messages are being deleted"""
+        entries = [
+            Flaskr('entry1', 'text'),
+            Flaskr('entry2', 'text')
+        ]
+        mock_db.session.query = Mock(return_value=entries)
+
+        rv = self.app.get('/search/?query=Hello')
+
+        mock_db.session.query.assert_called_once()
+
+        self.assertIn(b'<!DOCTYPE html>', rv.data)
 
 if __name__ == '__main__':
     unittest.main()
