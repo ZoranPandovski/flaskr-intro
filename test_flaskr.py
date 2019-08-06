@@ -104,7 +104,7 @@ class FlaskrTestCase(unittest.TestCase):
         rv = self.app.get('/delete/1')
         data = json.loads(rv.data)
         self.assertEqual(data['status'], 0)
-        self.assertEqual(data['message'], "Exception('Some message')")
+        self.assertEqual(data['message'], "Exception('Some message',)")
 
     def test_post_fail_without_login(self):
         """Ensure anonymous users can't make blog post"""
