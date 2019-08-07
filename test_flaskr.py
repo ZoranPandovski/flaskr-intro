@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from unittest.mock import patch, Mock
+from mock import patch, Mock
 
 from flask import json
 
